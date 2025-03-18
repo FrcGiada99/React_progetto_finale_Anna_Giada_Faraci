@@ -1,0 +1,30 @@
+body {
+    padding-top: 70px;
+}
+
+.navigationEffect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .navigationEffect:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    background-color: #f0f0f0; 
+  }
+
+  .hover-bg:hover {
+    background-color:  #e0e0e0;
+    color: #120a8f;
+  }
+
+.sidebar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+  
+  
