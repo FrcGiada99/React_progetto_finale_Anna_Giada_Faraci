@@ -1,3 +1,5 @@
+# ProgettoReacjJs
+
 ## Descrizione
 
 Gameverse è un'applicazione sviluppata con react che consente agli utenti non autenticati di poter navigare attraverso le pagine di dettaglio di ogni videogioco, cercare attraverso i filtri per genere e piattaforme, di cercare i giochi attraverso la barra di ricerca e potersi registrare inserendo nome, cognome, email e password. Gli utenti autenticati, una volta effettuato l'accesso, possono aggiungere i giochi nei preferiti, usare la chat all'interno della pagina di dettaglio di ogni gioco per interagire con gli altri utenti e visualizzare il proprio account con la lista dei giochi preferiti.
