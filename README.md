@@ -25,4 +25,4 @@ SessionContext permette di gestire le informazioni degli utenti autenticati come
 
 ## Deployment
 
-gameverseprogettoreact.vercel.app
+(gameverseprogettoreact.vercel.app)
