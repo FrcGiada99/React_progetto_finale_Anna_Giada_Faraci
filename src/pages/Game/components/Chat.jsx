@@ -33,32 +33,63 @@ export default function Chat({ game, session }) {
   return (
     <>
       <div className="chat_game_container"></div>
-      <Paper sx={{ padding: 2, maxWidth: 400, margin: "auto", marginTop: 2 }}>
-        <h1>Chat</h1>
+      <Paper
+        sx={{
+          padding: 3,
+          maxWidth: 500,
+          margin: "auto",
+          marginTop: 3,
+          borderRadius: 2,
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <h1 style={{ textAlign: "center", marginBottom: "1rem" }}>Chat</h1>
+
         <div
           style={{
             height: 300,
             overflowY: "auto",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-            padding: "8px",
-            marginBottom: "12px",
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            padding: "10px",
+            marginBottom: "16px",
+            backgroundColor: "#f9f9f9",
+            boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)",
           }}
         >
           <RealtimeChat game={game} />
         </div>
 
         <form onSubmit={handleMessageSubmit}>
-          <fieldset role="group">
+          <fieldset
+            role="group"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
             <TextField
               name="message"
               label="Scrivi un messaggio..."
               variant="outlined"
               fullWidth
               required
-              sx={{ marginBottom: 2 }}
+              sx={{
+                marginBottom: 2,
+                borderRadius: 1,
+                backgroundColor: "#fff",
+                boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",
+              }}
             />
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{
+                padding: "10px",
+                fontSize: "16px",
+                borderRadius: 1,
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+              }}
+            >
               Invia
             </Button>
           </fieldset>
