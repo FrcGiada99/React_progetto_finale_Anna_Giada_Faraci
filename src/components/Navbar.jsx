@@ -114,7 +114,7 @@ export default function Navbar() {
                 >
                   {avatar_url ? (
                     <img
-                      src={avatar_url}
+                      src={`https://fesxqpwcgaosjamhwhcf.supabase.co/storage/v1/object/public/avatars/${avatar_url}`}
                       alt="Avatar"
                       className="rounded-circle me-2"
                       width="30"

@@ -25,7 +25,7 @@ export default function ProfileAccount() {
         .single();
 
       if (error) {
-        toast.error("Errore nel recupero del profilo: " + error.message);
+        toast.error("Errore nel recupero del profilo: ");
         console.warn(error);
       } else if (data) {
         setUsername(data.username);
@@ -59,7 +59,7 @@ export default function ProfileAccount() {
     const { error } = await supabase.from("profiles").upsert(updates);
 
     if (error) {
-      toast.error("Errore durante l'aggiornamento: " + error.message);
+      toast.error("Errore durante l'aggiornamento: ");
     } else {
       toast.success("Profilo aggiornato con successo!");
     }
