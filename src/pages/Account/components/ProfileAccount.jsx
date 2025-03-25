@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import supabase from "../../../supabase/client";
 import SessionContext from "../../../context/SessionContext";
 import { Toaster, toast } from "sonner";
+import Avatar from "./Avatar";
 
 export default function ProfileAccount() {
   const { session } = useContext(SessionContext);
@@ -10,6 +11,7 @@ export default function ProfileAccount() {
   const [username, setUsername] = useState("");
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
+  const [avatar_url, setAvatarUrl] = useState(null);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -18,7 +20,7 @@ export default function ProfileAccount() {
 
       const { data, error } = await supabase
         .from("profiles")
-        .select("username, first_name, last_name")
+        .select("username, first_name, last_name, avatar_url")
         .eq("id", user.id)
         .single();
 
@@ -29,12 +31,14 @@ export default function ProfileAccount() {
         setUsername(data.username);
         setFirstName(data.first_name);
         setLastName(data.last_name);
+        setAvatarUrl(data.avatar_url);
       }
-
       setLoading(false);
     };
 
-    getProfile();
+    if (session) {
+      getProfile();
+    }
   }, [session]);
 
   async function updateProfile(event) {
@@ -48,18 +52,23 @@ export default function ProfileAccount() {
       username,
       first_name,
       last_name,
+      avatar_url,
       updated_at: new Date(),
     };
 
     const { error } = await supabase.from("profiles").upsert(updates);
 
     if (error) {
-      toast.error("Errore durante l'aggiornamento: ");
+      toast.error("Errore durante l'aggiornamento: " + error.message);
     } else {
       toast.success("Profilo aggiornato con successo!");
     }
 
     setLoading(false);
+  }
+
+  function handleAvatarUpload(url) {
+    setAvatarUrl(url);
   }
 
   if (!session || !session.user) {
@@ -77,6 +86,10 @@ export default function ProfileAccount() {
       >
         <h3 className="text-center mb-4">Modifica Profilo</h3>
         <form onSubmit={updateProfile}>
+          <div className="mb-3 text-center">
+            <label className="form-label d-block">Avatar</label>
+            <Avatar url={avatar_url} size={150} onUpload={handleAvatarUpload} />
+          </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email
@@ -142,9 +155,7 @@ export default function ProfileAccount() {
             <button
               className="btn btn-secondary w-100"
               type="button"
-              onClick={() => {
-                supabase.auth.signOut();
-              }}
+              onClick={() => supabase.auth.signOut()}
             >
               Logout
             </button>

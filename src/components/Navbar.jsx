@@ -9,6 +9,7 @@ export default function Navbar() {
   const { session } = useContext(SessionContext);
   const [username, setUsername] = useState(null);
   const [search, setSearch] = useState("");
+  const [avatar_url, setAvatarUrl] = useState(null);
 
   const signOut = async () => {
     await supabase.auth.signOut();
@@ -25,7 +26,7 @@ export default function Navbar() {
 
         const { data, error } = await supabase
           .from("profiles")
-          .select(`username`)
+          .select("username, avatar_url")
           .eq("id", user.id)
           .single();
 
@@ -34,6 +35,7 @@ export default function Navbar() {
             console.warn(error);
           } else if (data) {
             setUsername(data.username);
+            setAvatarUrl(data.avatar_url);
           }
         }
       }
@@ -103,13 +105,22 @@ export default function Navbar() {
             <ul className="navbar-nav">
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle text-light"
+                  className="nav-link dropdown-toggle text-light d-flex align-items-center"
                   href="#"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
+                  {avatar_url ? (
+                    <img
+                      src={avatar_url}
+                      alt="Avatar"
+                      className="rounded-circle me-2"
+                      width="30"
+                      height="30"
+                    />
+                  ) : null}
                   {session.user?.user_metadata?.username || username}
                 </a>
                 <ul
